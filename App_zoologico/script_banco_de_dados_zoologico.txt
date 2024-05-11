@@ -1,0 +1,35 @@
+-- Criação do banco de dados
+CREATE DATABASE crud_zoo
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LOCALE_PROVIDER = 'libc'
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+-- Criando a tabela de categorias
+CREATE TABLE categoria (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL
+);
+
+-- Criando a tabela de cadastro de animais
+CREATE TABLE animais (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    categoria_id INT,
+    FOREIGN KEY (categoria_id) REFERENCES Categoria(id)
+);
+
+-- Inserindo as categorias pré-cadastradas
+INSERT INTO categoria (nome) VALUES 
+('carnívoros'),
+('herbívoros'),
+('onívoros');
+
+-- Inserindo alguns animais
+INSERT INTO animais (nome, categoria_id) VALUES 
+('Leão', 1),
+('Elefante', 2),
+('Urso', 3),
+('Tigre', 1)
